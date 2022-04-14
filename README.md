@@ -64,27 +64,27 @@ and hit enter.
 
 ### getNextGuess()
 
-    	if out == 'END' or out == 'end':
-    		correctAns = True
-    		return
+        if out == 'END' or out == 'end':
+            correctAns = True
+            return
 
 - The code block above checks to see if the user entered `END` or `end`, and stops the function if they did.
 
-      	sub = 0
-      	for char in out:
-      		if char == 'g':
-      			posList[sub] = ans[sub: sub+1]
-      		else:
-      			posList[sub] = '-'
-      		[...]
-      		sub += 1
+        sub = 0
+        for char in out:
+            if char == 'g':
+                posList[sub] = ans[sub: sub+1]
+            else:
+                posList[sub] = '-'
+            [...]
+            sub += 1
 
 - The variable `out` is the information wordle gave us about the answer.
 - The code above looks at `out` and checks for characters marked as GREEN (`g`) and stores the character and the substring that was marked in a variable.
 
-      	if char == 'y':
-      	    letInWord.append(ans[sub: sub+1])
-      	    incorrectPos.append(sub)
+        if char == 'y':
+            letInWord.append(ans[sub: sub+1])
+            incorrectPos.append(sub)
         elif char == 'b':
             if ans[sub: sub+1] in letInWord:
                 noSecChar.append(ans[sub: sub+1])
