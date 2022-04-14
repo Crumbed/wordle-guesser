@@ -195,7 +195,7 @@ def getNextGuess(ans, out):
     global incorrectPos
     global noSecChar
     global noSecCharPos
-    if out == 'END' or out == 'end':
+    if out == 'END' or out == 'end' or out == 'ggggg':
         correctAns = True
         return
 
