@@ -11,7 +11,8 @@ Everything you need to know will be found here.
         pip install dataclasses
 
 After that: 4. Go to the file directory of `wordle_algorithm.py`. Ex:
-C:\Desktop\Wordle-Guesser
+
+    	C:\Desktop\Wordle-Guesser
 
 5.  Open cmd and type:
 
@@ -52,3 +53,11 @@ and hit enter.
         =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
 5.  And repeat! Remember to type `end` in the output line to stop the program.
+
+# How does it work?
+
+## The algorithm
+
+1. Well first the program opens and reads the `weighted_records.csv` file that the `dataStorage.py` script generates. (see more about that script below)
+
+2. Then the program asks the user if they want to use a custom answer or the recommended answer, then runs a function called `getNextGuess`.
