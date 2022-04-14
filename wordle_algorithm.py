@@ -1,13 +1,3 @@
-# add check to make words with repeated letter have less weight
-
-# check for words with double letters, ex:
-# if the word is "world"
-# it guesses "floor"
-#
-# it marks it as '01101'
-# saying that it both has an 'o' and doesnt have an 'o'
-# this creates an error and returns 'None' (doesnt exist)
-#
 
 import csv
 from dataclasses import replace
@@ -237,7 +227,6 @@ def getNextGuess(ans, out):
         f'=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTop picks based on probability:\n{dotJoin.join(topPicks)}\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 
 
-tempAnswer = 'wimpy'
 
 for i in range(6):
     if correctAns == True:
