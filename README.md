@@ -94,4 +94,5 @@ and hit enter.
         sub += 1
 
 - The variable `sub` keeps track of the substring of the character we are checking.
-- The code above first checks for characters marked as YELLOW (`y`) and adds the letter
+- The code above first checks for characters marked as YELLOW (`y`) and adds the letter and substring marked as yellow to a list.
+- Then it looks for words marked as GRAY (`b`)
