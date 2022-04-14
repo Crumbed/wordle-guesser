@@ -35,4 +35,20 @@ and hit enter.
         Enter 'END' to stop the program and log your score.
         Enter the output of salet (gray: b, yellow: y, green: g):
 
-3.  In this example you would enter `salet` into wordle.
+3.  In this example you would enter `salet` into wordle. And enter the information wordle gives you. Ex:
+
+        Enter the output of salet (gray: b, yellow: y, green: g): bgyyb
+
+4.  Then the program will display a string with the positions of the known letters followed by a list a the most likely guesses.
+
+        Known letter possitions: -a---
+        =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+        Top picks based on probability:
+        large: 78.9352
+        early: 77.8138
+        lance: 76.8212
+        cable: 50.1691
+        fable: 46.9729
+        =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+5.  And repeat! Remember to type `end` in the output line to stop the program.
