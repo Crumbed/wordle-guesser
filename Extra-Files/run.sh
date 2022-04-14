@@ -1,0 +1,1 @@
+python Main-Files/wordle_algorithm.py

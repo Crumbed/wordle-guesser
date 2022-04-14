@@ -9,7 +9,7 @@ filtPosAns = possibleAnswers
 
 dotJoin = '\n'
 
-filename = 'weighted_records.csv'
+filename = 'Main-Files/weighted_records.csv'
 
 fields = []
 rows = []
@@ -227,9 +227,10 @@ def getNextGuess(ans, out):
         f'=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTop picks based on probability:\n{dotJoin.join(topPicks)}\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 
 
-
+guessNum = 0
 for i in range(6):
     if correctAns == True:
+        guessNum = i
         break
     wordChoice = input(
         f'(1) Input your own guess\n(2) Use recommended guess\nInput 1 or 2: ')
@@ -242,6 +243,27 @@ for i in range(6):
     getNextGuess(inputedAns, inputedOut)
 
 if correctAns == True:
-    print(f'The answer was {inputedAns}')
+    print(f'I got the answer "{inputedAns}" in {guessNum} guesses!')
 else:
     print('Sorry but it seems that I couldnt figure it out')
+
+if input('Was this a REAL wordle game? (yes: y, no: n) ') == 'y':
+    games = open('Main-Files/games.txt', 'r')
+    old = games.read()
+    sub = 1
+    aftCm = 0
+    for char in old:
+        if char == ',':
+            gamesPlayed = old[0: sub-1]
+            aftCm = sub
+        elif char == '|':
+            addedGuesses = old[aftCm: sub-1]
+        sub += 1
+    gamesPlayed = int(gamesPlayed) + 1
+    addedGuesses = int(addedGuesses) + guessNum
+    avgGuess = addedGuesses / gamesPlayed
+    print(f"In the time you've used this program, \nyou've played {gamesPlayed} games.\naverage number of guesses: {avgGuess}")
+    newGames = f'{gamesPlayed},{addedGuesses}|'
+    with open('Main-Files/games.txt', 'w') as games:
+        games.write(newGames)
+    
