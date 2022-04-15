@@ -1,4 +1,5 @@
 
+from tkinter import *
 import csv
 from dataclasses import replace
 
@@ -64,15 +65,10 @@ def getProbability(posAns):
     global cl
     global clWeight
 
-    sortedAns = []
     ansWeights = []
     ansAndWeights = []
 
     simpleRows = []
-
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
-               'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-    nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
     notAllowed = ['\'', '[', ']']
 
@@ -227,6 +223,85 @@ def getNextGuess(ans, out):
         f'=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTop picks based on probability:\n{dotJoin.join(topPicks)}\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 
 
+window = Tk()
+
+window.geometry('600x450')
+window.title('Wordle Algorithm')
+window.config(bg="black")
+window.resizable(False, False)
+
+wordLblBorder = Frame(window, bg='#cacaca')
+enterWordLbl = Label(wordLblBorder,
+                     text='Wordle Algorithm',
+                     font=('Arial', 24, 'bold'),
+                     bg='black',
+                     fg='#cacaca',
+                     bd=0)
+enterWordLbl.pack(padx=2, pady=2)
+wordLblBorder.pack(padx=0, pady=5)
+
+letterBorder1 = Frame(window,
+                      bg='#5f5f5f',
+                      width=2)
+letterEnter1 = Entry(letterBorder1,
+                     width=2,
+                     bg='#202020',
+                     font=('Arial', 50),
+                     fg='#cacaca',
+                     justify='center')
+letterEnter1.pack(padx=2, pady=2)
+letterBorder1.place(x=57, y=75)
+
+letterBorder2 = Frame(window,
+                      bg='#5f5f5f',
+                      width=2)
+letterEnter2 = Entry(letterBorder2,
+                     width=2,
+                     bg='#202020',
+                     font=('Arial', 50),
+                     fg='#cacaca',
+                     justify='center')
+letterEnter2.pack(padx=2, pady=2)
+letterBorder2.place(x=157, y=75)
+
+letterBorder3 = Frame(window,
+                      bg='#5f5f5f',
+                      width=2)
+letterEnter3 = Entry(letterBorder3,
+                     width=2,
+                     bg='#202020',
+                     font=('Arial', 50),
+                     fg='#cacaca',
+                     justify='center')
+letterEnter3.pack(padx=2, pady=2)
+letterBorder3.place(x=257, y=75)
+
+letterBorder4 = Frame(window,
+                      bg='#5f5f5f',
+                      width=2)
+letterEnter4 = Entry(letterBorder4,
+                     width=2,
+                     bg='#202020',
+                     font=('Arial', 50),
+                     fg='#cacaca',
+                     justify='center')
+letterEnter4.pack(padx=2, pady=2)
+letterBorder4.place(x=357, y=75)
+
+letterBorder5 = Frame(window,
+                      bg='#5f5f5f',
+                      width=2)
+letterEnter5 = Entry(letterBorder5,
+                     width=2,
+                     bg='#202020',
+                     font=('Arial', 50),
+                     fg='#cacaca',
+                     justify='center')
+letterEnter5.pack(padx=2, pady=2)
+letterBorder5.place(x=457, y=75)
+
+window.mainloop()
+
 guessNum = 0
 for i in range(6):
     if correctAns == True:
@@ -262,8 +337,8 @@ if input('Was this a REAL wordle game? (yes: y, no: n) ') == 'y':
     gamesPlayed = int(gamesPlayed) + 1
     addedGuesses = int(addedGuesses) + guessNum
     avgGuess = addedGuesses / gamesPlayed
-    print(f"In the time you've used this program, \nyou've played {gamesPlayed} games.\naverage number of guesses: {avgGuess}")
+    print(
+        f"In the time you've used this program, \nyou've played {gamesPlayed} games.\naverage number of guesses: {avgGuess}")
     newGames = f'{gamesPlayed},{addedGuesses}|'
     with open('Main-Files/games.txt', 'w') as games:
         games.write(newGames)
-    
