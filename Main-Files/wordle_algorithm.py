@@ -222,6 +222,7 @@ def getNextGuess(ans, out):
     print(
         f'=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTop picks based on probability:\n{dotJoin.join(topPicks)}\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 
+dispLetterList = ['s', 'a', 'l', 'e', 't']
 
 window = Tk()
 
@@ -229,6 +230,27 @@ window.geometry('600x450')
 window.title('Wordle Algorithm')
 window.config(bg="black")
 window.resizable(False, False)
+
+def newWord():
+    newWord = newWordEntry.get()
+    if(len(newWord) != 5):
+        newWordConfirm.config(text='invalid')
+        return
+    letterLbl1.config(text=newWord[0: 1])
+
+newWordConfirm = Button(window,
+                        text='Enter',
+                        bg='#202020',
+                        fg='#cacaca',
+                        justify='center',
+                        command=newWord)
+
+newWordEntry = Entry(window,
+                     font=('Arial', 12, 'bold'),
+                     bg='#202020',
+                     fg='#cacaca',
+                     justify='center')
+newWordEntry.pack_forget()
 
 wordLblBorder = Frame(window, bg='#cacaca')
 enterWordLbl = Label(wordLblBorder,
@@ -243,62 +265,71 @@ wordLblBorder.pack(padx=0, pady=5)
 letterBorder1 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
-letterEnter1 = Entry(letterBorder1,
+letterLbl1 = Label(letterBorder1,
+                     text=dispLetterList[0],
                      width=2,
                      bg='#202020',
                      font=('Arial', 50),
                      fg='#cacaca',
                      justify='center')
-letterEnter1.pack(padx=2, pady=2)
+letterLbl1.pack(padx=2, pady=2)
 letterBorder1.place(x=57, y=75)
 
 letterBorder2 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
-letterEnter2 = Entry(letterBorder2,
+letterLbl2 = Label(letterBorder2,
+                     text=dispLetterList[1],
                      width=2,
                      bg='#202020',
                      font=('Arial', 50),
                      fg='#cacaca',
                      justify='center')
-letterEnter2.pack(padx=2, pady=2)
+letterLbl2.pack(padx=2, pady=2)
 letterBorder2.place(x=157, y=75)
 
 letterBorder3 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
-letterEnter3 = Entry(letterBorder3,
+letterLbl3 = Label(letterBorder3,
+                     text=dispLetterList[2],
                      width=2,
                      bg='#202020',
                      font=('Arial', 50),
                      fg='#cacaca',
                      justify='center')
-letterEnter3.pack(padx=2, pady=2)
+letterLbl3.pack(padx=2, pady=2)
 letterBorder3.place(x=257, y=75)
 
 letterBorder4 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
-letterEnter4 = Entry(letterBorder4,
+letterLbl4 = Label(letterBorder4,
+                     text=dispLetterList[3],
                      width=2,
                      bg='#202020',
                      font=('Arial', 50),
                      fg='#cacaca',
                      justify='center')
-letterEnter4.pack(padx=2, pady=2)
+letterLbl4.pack(padx=2, pady=2)
 letterBorder4.place(x=357, y=75)
 
 letterBorder5 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
-letterEnter5 = Entry(letterBorder5,
+letterLbl5 = Label(letterBorder5,
+                     text=dispLetterList[4],
                      width=2,
                      bg='#202020',
                      font=('Arial', 50),
                      fg='#cacaca',
                      justify='center')
-letterEnter5.pack(padx=2, pady=2)
+letterLbl5.pack(padx=2, pady=2)
 letterBorder5.place(x=457, y=75)
+
+
+newWordEntry.place(x=208, y=175)
+newWordConfirm.place(x=280, y=210)
 
 window.mainloop()
 
@@ -338,7 +369,7 @@ if input('Was this a REAL wordle game? (yes: y, no: n) ') == 'y':
     addedGuesses = int(addedGuesses) + guessNum
     avgGuess = addedGuesses / gamesPlayed
     print(
-        f"In the time you've used this program, \nyou've played {gamesPlayed} games.\naverage number of guesses: {avgGuess}")
+        f"In the time you've used this program, \nyou've played {gamesPlayed} game(s).\naverage number of guesses: {avgGuess}")
     newGames = f'{gamesPlayed},{addedGuesses}|'
     with open('Main-Files/games.txt', 'w') as games:
         games.write(newGames)
