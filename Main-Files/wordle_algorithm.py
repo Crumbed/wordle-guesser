@@ -222,7 +222,10 @@ def getNextGuess(ans, out):
     print(
         f'=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTop picks based on probability:\n{dotJoin.join(topPicks)}\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
 
+
+colorIndex = 0
 dispLetterList = ['s', 'a', 'l', 'e', 't']
+colorsList = ['#202020', '#202020', '#202020', '#202020', '#202020']
 
 window = Tk()
 
@@ -231,12 +234,27 @@ window.title('Wordle Algorithm')
 window.config(bg="black")
 window.resizable(False, False)
 
+# setGray, setYellow, setGreen ---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+def setgray
+
+
 def newWord():
+    print('test')
     newWord = newWordEntry.get()
     if(len(newWord) != 5):
         newWordConfirm.config(text='invalid')
         return
-    letterLbl1.config(text=newWord[0: 1])
+    dispLetterList = []
+    for i in newWord:
+        dispLetterList.append(i)
+    letterLbl1.config(text=dispLetterList[0])
+    letterLbl2.config(text=dispLetterList[1])
+    letterLbl3.config(text=dispLetterList[2])
+    letterLbl4.config(text=dispLetterList[3])
+    letterLbl5.config(text=dispLetterList[4])
+
 
 newWordConfirm = Button(window,
                         text='Enter',
@@ -244,6 +262,7 @@ newWordConfirm = Button(window,
                         fg='#cacaca',
                         justify='center',
                         command=newWord)
+
 
 newWordEntry = Entry(window,
                      font=('Arial', 12, 'bold'),
@@ -266,12 +285,12 @@ letterBorder1 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
 letterLbl1 = Label(letterBorder1,
-                     text=dispLetterList[0],
-                     width=2,
-                     bg='#202020',
-                     font=('Arial', 50),
-                     fg='#cacaca',
-                     justify='center')
+                   text=dispLetterList[0],
+                   width=2,
+                   bg=colorsList[0],
+                   font=('Arial', 50),
+                   fg='#cacaca',
+                   justify='center')
 letterLbl1.pack(padx=2, pady=2)
 letterBorder1.place(x=57, y=75)
 
@@ -279,12 +298,12 @@ letterBorder2 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
 letterLbl2 = Label(letterBorder2,
-                     text=dispLetterList[1],
-                     width=2,
-                     bg='#202020',
-                     font=('Arial', 50),
-                     fg='#cacaca',
-                     justify='center')
+                   text=dispLetterList[1],
+                   width=2,
+                   bg=colorsList[1],
+                   font=('Arial', 50),
+                   fg='#cacaca',
+                   justify='center')
 letterLbl2.pack(padx=2, pady=2)
 letterBorder2.place(x=157, y=75)
 
@@ -292,12 +311,12 @@ letterBorder3 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
 letterLbl3 = Label(letterBorder3,
-                     text=dispLetterList[2],
-                     width=2,
-                     bg='#202020',
-                     font=('Arial', 50),
-                     fg='#cacaca',
-                     justify='center')
+                   text=dispLetterList[2],
+                   width=2,
+                   bg=colorsList[2],
+                   font=('Arial', 50),
+                   fg='#cacaca',
+                   justify='center')
 letterLbl3.pack(padx=2, pady=2)
 letterBorder3.place(x=257, y=75)
 
@@ -305,12 +324,12 @@ letterBorder4 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
 letterLbl4 = Label(letterBorder4,
-                     text=dispLetterList[3],
-                     width=2,
-                     bg='#202020',
-                     font=('Arial', 50),
-                     fg='#cacaca',
-                     justify='center')
+                   text=dispLetterList[3],
+                   width=2,
+                   bg=colorsList[3],
+                   font=('Arial', 50),
+                   fg='#cacaca',
+                   justify='center')
 letterLbl4.pack(padx=2, pady=2)
 letterBorder4.place(x=357, y=75)
 
@@ -318,15 +337,42 @@ letterBorder5 = Frame(window,
                       bg='#5f5f5f',
                       width=2)
 letterLbl5 = Label(letterBorder5,
-                     text=dispLetterList[4],
-                     width=2,
-                     bg='#202020',
-                     font=('Arial', 50),
-                     fg='#cacaca',
-                     justify='center')
+                   text=dispLetterList[4],
+                   width=2,
+                   bg=colorsList[4],
+                   font=('Arial', 50),
+                   fg='#cacaca',
+                   justify='center')
 letterLbl5.pack(padx=2, pady=2)
 letterBorder5.place(x=457, y=75)
 
+grayBtn = Button(window,
+                 font=('Arial', 25),
+                 text='Gray',
+                 bg='#202020',
+                 fg='#cacaca',
+                 justify="center",
+                 command=setGray)
+
+yellowBtn = Button(window,
+                   font=('Arial', 25),
+                   text='Yellow',
+                   bg='yellow',
+                   fg='#cacaca',
+                   justify="center",
+                   command=setYellow)
+
+greenBtn = Button(window,
+                  font=('Arial', 25),
+                  text='Green',
+                  bg='green',
+                  fg='#cacaca',
+                  justify="center",
+                  command=setGreen)
+
+grayBtn.place(x=57, y=250)
+yellowBtn.place(x=240, y=250)
+greenBtn.place(x=428, y=250)
 
 newWordEntry.place(x=208, y=175)
 newWordConfirm.place(x=280, y=210)
