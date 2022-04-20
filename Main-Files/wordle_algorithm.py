@@ -124,9 +124,9 @@ def getProbability(posAns):
             for word in posAns:
                 if f'{word} - {ansWeights[i]}' in ansAndWeights:
                     topPicks.append(f'{word}: {ansWeights[i]}')
-        
+
     if len(topPicks) > 3:
-        for i in range(len(topPicks)):
+        while len(topPicks) > 3:
             topPicks.pop(len(topPicks)-1)
     return topPicks[0][0: 5]
 
@@ -224,6 +224,7 @@ def getNextGuess(ans, out):
         knownLetPos, letInWord, incorrectPos, letNotInWord, noSecChar, noSecCharPos)
     inputedAns = getProbability(filtPosAns)
 
+
 colorIndex = 0
 dispLetterList = ['s', 'a', 'l', 'e', 't']
 colorsList = ['#202020', '#202020', '#202020', '#202020', '#202020']
@@ -234,12 +235,6 @@ window.geometry('600x450')
 window.title('Wordle Algorithm')
 window.config(bg="black")
 window.resizable(False, False)
-
-# setGray, setYellow, setGreen ---------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-    
 
 
 def updateLetters():
@@ -261,6 +256,7 @@ def updateLetters():
     letterLbl4.config(bg=colorsList[3])
     letterLbl5.config(bg=colorsList[4])
 
+
 def setGray():
     global colorIndex
     if colorIndex >= 4:
@@ -268,6 +264,7 @@ def setGray():
     colorsList[colorIndex] = '#828282'
     updateLetters()
     colorIndex += 1
+
 
 def setYellow():
     global colorIndex
@@ -277,6 +274,7 @@ def setYellow():
     updateLetters()
     colorIndex += 1
 
+
 def setGreen():
     global colorIndex
     if colorIndex >= 4:
@@ -284,8 +282,6 @@ def setGreen():
     colorsList[colorIndex] = 'green'
     updateLetters()
     colorIndex += 1
-
-
 
 
 def newWord():
@@ -317,7 +313,7 @@ def startAlgo():
             inputedOut = inputedOut + 'y'
         elif color == 'green':
             inputedOut = inputedOut + 'g'
-    
+
     getNextGuess(inputedAns, inputedOut)
 
     dispLetterList = []
@@ -326,11 +322,9 @@ def startAlgo():
 
     colorsList = ['#202020', '#202020', '#202020', '#202020', '#202020']
     colorIndex = 0
-    
-    updateLetters()
-    topPicksLbl.config(text='Top Picks:\n'+',\n'.join(topPicks))
 
-    
+    updateLetters()
+    topPicksLbl.config(text='Top Picks:\n'+'\n'.join(topPicks))
 
 
 newWordConfirm = Button(window,
@@ -459,7 +453,7 @@ topPicksFrame = Frame(window,
                       bg='#5f5f5f',
                       width=2)
 topPicksLbl = Label(topPicksFrame,
-                    font=('Arial', 8),
+                    font=('Arial', 12),
                     bg='#000000',
                     fg='#cacaca',
                     justify='left',
