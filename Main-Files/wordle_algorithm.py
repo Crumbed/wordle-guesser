@@ -124,6 +124,10 @@ def getProbability(posAns):
             for word in posAns:
                 if f'{word} - {ansWeights[i]}' in ansAndWeights:
                     topPicks.append(f'{word}: {ansWeights[i]}')
+        
+    if len(topPicks) > 3:
+        for i in range(len(topPicks)):
+            topPicks.pop(len(topPicks)-1)
     return topPicks[0][0: 5]
 
 
@@ -219,9 +223,6 @@ def getNextGuess(ans, out):
     filtPosAns = filterPossibleGuesses(
         knownLetPos, letInWord, incorrectPos, letNotInWord, noSecChar, noSecCharPos)
     inputedAns = getProbability(filtPosAns)
-    print(
-        f'=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=\nTop picks based on probability:\n{dotJoin.join(topPicks)}\n=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=')
-
 
 colorIndex = 0
 dispLetterList = ['s', 'a', 'l', 'e', 't']
@@ -237,7 +238,54 @@ window.resizable(False, False)
 # setGray, setYellow, setGreen ---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-def setgray
+
+    
+
+
+def updateLetters():
+    global letterLbl1
+    global letterLbl2
+    global letterLbl3
+    global letterLbl4
+    global letterLbl5
+
+    letterLbl1.config(text=dispLetterList[0])
+    letterLbl2.config(text=dispLetterList[1])
+    letterLbl3.config(text=dispLetterList[2])
+    letterLbl4.config(text=dispLetterList[3])
+    letterLbl5.config(text=dispLetterList[4])
+
+    letterLbl1.config(bg=colorsList[0])
+    letterLbl2.config(bg=colorsList[1])
+    letterLbl3.config(bg=colorsList[2])
+    letterLbl4.config(bg=colorsList[3])
+    letterLbl5.config(bg=colorsList[4])
+
+def setGray():
+    global colorIndex
+    if colorIndex >= 4:
+        startAlgorithmBtn.place(x=243, y=350)
+    colorsList[colorIndex] = '#828282'
+    updateLetters()
+    colorIndex += 1
+
+def setYellow():
+    global colorIndex
+    if colorIndex >= 4:
+        startAlgorithmBtn.place(x=243, y=350)
+    colorsList[colorIndex] = 'yellow'
+    updateLetters()
+    colorIndex += 1
+
+def setGreen():
+    global colorIndex
+    if colorIndex >= 4:
+        startAlgorithmBtn.place(x=243, y=350)
+    colorsList[colorIndex] = 'green'
+    updateLetters()
+    colorIndex += 1
+
+
 
 
 def newWord():
@@ -249,11 +297,40 @@ def newWord():
     dispLetterList = []
     for i in newWord:
         dispLetterList.append(i)
-    letterLbl1.config(text=dispLetterList[0])
-    letterLbl2.config(text=dispLetterList[1])
-    letterLbl3.config(text=dispLetterList[2])
-    letterLbl4.config(text=dispLetterList[3])
-    letterLbl5.config(text=dispLetterList[4])
+    updateLetters()
+
+
+def startAlgo():
+    global inputedAns
+    global inputedOut
+    global dispLetterList
+    global colorsList
+    global colorIndex
+
+    inputedOut = ''
+
+    inputedAns = ''.join(dispLetterList)
+    for color in colorsList:
+        if color == '#828282':
+            inputedOut = inputedOut + 'b'
+        elif color == 'yellow':
+            inputedOut = inputedOut + 'y'
+        elif color == 'green':
+            inputedOut = inputedOut + 'g'
+    
+    getNextGuess(inputedAns, inputedOut)
+
+    dispLetterList = []
+    for char in inputedAns:
+        dispLetterList.append(char)
+
+    colorsList = ['#202020', '#202020', '#202020', '#202020', '#202020']
+    colorIndex = 0
+    
+    updateLetters()
+    topPicksLbl.config(text='Top Picks:\n'+',\n'.join(topPicks))
+
+    
 
 
 newWordConfirm = Button(window,
@@ -349,7 +426,7 @@ letterBorder5.place(x=457, y=75)
 grayBtn = Button(window,
                  font=('Arial', 25),
                  text='Gray',
-                 bg='#202020',
+                 bg='#828282',
                  fg='#cacaca',
                  justify="center",
                  command=setGray)
@@ -370,6 +447,27 @@ greenBtn = Button(window,
                   justify="center",
                   command=setGreen)
 
+startAlgorithmBtn = Button(window,
+                           font=('Arial', 15),
+                           text='Get Guess',
+                           bg='#202020',
+                           fg='#cacaca',
+                           justify='center',
+                           command=startAlgo)
+
+topPicksFrame = Frame(window,
+                      bg='#5f5f5f',
+                      width=2)
+topPicksLbl = Label(topPicksFrame,
+                    font=('Arial', 8),
+                    bg='#000000',
+                    fg='#cacaca',
+                    justify='left',
+                    text='Top Picks:\n'+',    '.join(topPicks))
+
+topPicksFrame.place(x=20, y=350)
+topPicksLbl.pack(padx=2, pady=2)
+
 grayBtn.place(x=57, y=250)
 yellowBtn.place(x=240, y=250)
 greenBtn.place(x=428, y=250)
@@ -380,42 +478,3 @@ newWordConfirm.place(x=280, y=210)
 window.mainloop()
 
 guessNum = 0
-for i in range(6):
-    if correctAns == True:
-        guessNum = i
-        break
-    wordChoice = input(
-        f'(1) Input your own guess\n(2) Use recommended guess\nInput 1 or 2: ')
-    if wordChoice == '1':
-        inputedAns = input('Enter your guess: ')
-    print(
-        f'---------------------------------------\nGuess: {i+1}, {inputedAns}\n---------------------------------------\nEnter \'END\' to stop the program and log your score.')
-    inputedOut = input(
-        f'Enter the output of {inputedAns} (gray: b, yellow: y, green: g): ')
-    getNextGuess(inputedAns, inputedOut)
-
-if correctAns == True:
-    print(f'I got the answer "{inputedAns}" in {guessNum} guesses!')
-else:
-    print('Sorry but it seems that I couldnt figure it out')
-
-if input('Was this a REAL wordle game? (yes: y, no: n) ') == 'y':
-    games = open('Main-Files/games.txt', 'r')
-    old = games.read()
-    sub = 1
-    aftCm = 0
-    for char in old:
-        if char == ',':
-            gamesPlayed = old[0: sub-1]
-            aftCm = sub
-        elif char == '|':
-            addedGuesses = old[aftCm: sub-1]
-        sub += 1
-    gamesPlayed = int(gamesPlayed) + 1
-    addedGuesses = int(addedGuesses) + guessNum
-    avgGuess = addedGuesses / gamesPlayed
-    print(
-        f"In the time you've used this program, \nyou've played {gamesPlayed} game(s).\naverage number of guesses: {avgGuess}")
-    newGames = f'{gamesPlayed},{addedGuesses}|'
-    with open('Main-Files/games.txt', 'w') as games:
-        games.write(newGames)
