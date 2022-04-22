@@ -1,4 +1,6 @@
 
+from cgitb import reset
+from configparser import NoSectionError
 from tkinter import *
 import csv
 from dataclasses import replace
@@ -34,8 +36,6 @@ with open(filename, 'r') as csvfile:
 
 inputedAns = 'salet'
 inputedOut = ''
-
-correctAns = False
 
 knownLetPos = '-----'
 letInWord = []
@@ -175,9 +175,36 @@ def filterPossibleGuesses(knownPos, correctLet, incorrectSub, notIn, noSec, noSe
     return filtPosAns
 
 
+def resetProg():
+    global colorIndex
+    global dispLetterList
+    global colorsList
+    global inputedAns
+    global knownLetPos
+    global letInWord
+    global letNotInWord
+    global incorrectPos
+    global noSecChar
+    global noSecCharPos
+    global filtPosAns
+
+    filtPosAns = possibleAnswers
+
+    colorIndex = 0
+    dispLetterList = ['s', 'a', 'l', 'e', 't']
+    colorsList = ['#202020', '#202020', '#202020', '#202020', '#202020']
+
+    inputedAns = 'salet'
+    knownLetPos = '-----'
+    letInWord = []
+    letNotInWord = []
+    incorrectPos = []
+    noSecChar = []
+    noSecCharPos = []
+
+
 def getNextGuess(ans, out):
 
-    global correctAns
     global inputedAns
     global knownLetPos
     global letInWord
@@ -186,7 +213,7 @@ def getNextGuess(ans, out):
     global noSecChar
     global noSecCharPos
     if out == 'END' or out == 'end' or out == 'ggggg':
-        correctAns = True
+        resetProg()
         return
 
     global rows
@@ -459,7 +486,7 @@ topPicksLbl = Label(topPicksFrame,
                     justify='left',
                     text='Top Picks:\n'+',    '.join(topPicks))
 
-topPicksFrame.place(x=20, y=350)
+topPicksFrame.place(x=57, y=350)
 topPicksLbl.pack(padx=2, pady=2)
 
 grayBtn.place(x=57, y=250)
